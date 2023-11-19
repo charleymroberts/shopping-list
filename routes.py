@@ -1,6 +1,18 @@
-from flask import render_template
-from app import app
+from flask import render_template, request, redirect, url_for
+from app import app, db
+from models import Item
 
-@app.route('/')
+
+@app.route("/", methods=["GET", "POST"])
 def home():
-    return render_template('home.html')
+    items = list(Item.query.order_by(Item.id).all())
+    if request.method == "POST":
+        item = Item(name=request.form.get("item_name"))
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("home.html", items=items)
+
+
+
+

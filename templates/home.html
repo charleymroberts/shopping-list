@@ -1,2 +1,13 @@
 <h1>Shopping list</h1>
-<p>Add your items here:</p>
+
+<form method="POST" action="{{ url_for('home') }}">
+    <p>
+        <label for="item_name">Add item:</label>
+        <input id="item_name" type="text" name="item_name"/>
+    </p>
+    <p><input type="submit" name="submit"/></p>
+</form>
+
+{% for item in items %}
+    <p>{{ item.name }}</p>
+{% endfor %}
