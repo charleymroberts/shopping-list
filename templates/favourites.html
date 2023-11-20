@@ -1,0 +1,19 @@
+<h1>Favourite items</h1>
+
+<h2>Add new favourite</h2>
+
+<form action="{{ url_for('favourites_list') }}" method="POST">
+    <p>
+        <label for="favourite_name">Enter item name:</label>
+        <input id="favourite_name" type="text" name="favourite_name"/>
+    </p>
+    <p>
+        <input type="submit" name="submit" value="Add favourite">
+    </p>
+</form>
+
+<h2>All favourites</h2>
+
+{% for favourite in favourites %}
+    {{ favourite.name }}
+{% endfor %}

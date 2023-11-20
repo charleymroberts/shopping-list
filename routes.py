@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from app import app, db
-from models import Item
+from models import Item, Favourite
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,3 +22,12 @@ def delete_item(item_id):
     return redirect(url_for("home"))
 
 
+@app.route("/favourites", methods=["GET", "POST"])
+def favourites_list():
+    favourites = list(Favourite.query.order_by(Favourite.name).all())
+    if request.method == "POST":
+        new_favourite = Favourite(name=request.form.get("favourite_name"))
+        db.session.add(new_favourite)
+        db.session.commit()
+        return redirect(url_for("favourites_list"))
+    return render_template("favourites.html", favourites=favourites)

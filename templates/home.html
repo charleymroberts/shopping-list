@@ -2,13 +2,13 @@
 
 <form method="POST" action="{{ url_for('home') }}">
     <p>
-        <label for="item_name">Add item:</label>
+        <label for="item_name">Enter item name:</label>
         <input id="item_name" type="text" name="item_name"/>
     </p>
-    <p><input type="submit" name="submit"/></p>
+    <p><input type="submit" name="submit" value="Add item"/></p>
 </form>
 
 {% for item in items %}
-    <p>{{ item.name }}<a href="{{ url_for('delete_item', item_id=item.id) }}"> remove </a></p>
+    <p>{{ item.name }} <a href="{{ url_for('delete_item', item_id=item.id) }}"> remove </a></p>
 
 {% endfor %}
